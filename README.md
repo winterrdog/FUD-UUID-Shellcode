@@ -31,7 +31,7 @@ This shellcode injection technique comprises the following subsequent steps:
 * First things first, it allocates virtual memory for payload execution and residence via `VirtualAlloc`
 * It `xor` decrypts the payload using the `xor` key value 
 * Uses `UuidFromStringA` to convert `UUID` strings into their binary representation and store them in the previously allocated memory. This is used to avoid the usage of suspicious APIs like `WriteProcessMemory` or `memcpy`.
-* Use `EnumChildWindows` to execute the payload previously loaded into memory( in step 1 )
+* Uses `EnumCalendarInfoEx` to execute the payload previously loaded into memory( in step 1 )
 
 # What makes it unique?
 * It doesn't use standard functions like `memcpy` or `WriteProcessMemory` which are known to raise alarms to AVs/EDRs, this program uses the Windows API function called `UuidFromStringA` which can be used to decode data as well as write it to memory( **Isn't that great folks?** *And please don't say "NO!"* :) ).
@@ -39,8 +39,8 @@ This shellcode injection technique comprises the following subsequent steps:
 * Lastly, because it looks unique :) ( *Isn't it?* :) )
 
 # Important
-* You have to change the `xor` key(line 85) to what you wish. This also has to be done in the `./xor_encryptor.py` python3 script by changing the `KEY` variable. The keys have to match!
-* You have to change the default `executable filename` value(row 90) to your filename.
+* You have to change the `xor` key( line 13 ) to what you wish. This also has to be done in the `./xor_encryptor.py` python3 script by changing the `KEY` variable( line 5 ). The keys have to match!
+* You have to change the default `executable filename` value( line 15 ) to your filename.
 * `mingw` was used but you can use whichever compiler you prefer. :)
 
 ## Compile
